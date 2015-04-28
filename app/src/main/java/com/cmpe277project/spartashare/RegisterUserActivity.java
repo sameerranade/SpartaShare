@@ -29,20 +29,21 @@ import java.util.HashMap;
 public class RegisterUserActivity extends ActionBarActivity {
 
     String email;
+    private EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
-
+        displayUserInfo();
         Button button = (Button) findViewById(R.id.registerbtn);
-        email = displayUserInfo();
-        Log.d("email", email);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                registerUser(email);
 
+                email = editText.getText().toString();
+                Log.d("Inside Button Click", "Email is "+email);
                 BuiltUser user = new BuiltUser();
                 HashMap usrInfo = new HashMap();
 
@@ -71,7 +72,7 @@ public class RegisterUserActivity extends ActionBarActivity {
                     public void onAlways() {
                         // write code here that you want to execute
                         // regardless of success or failure of the operation
-                        Toast.makeText(RegisterUserActivity.this,"What happened here",Toast.LENGTH_LONG).show();
+                        //Toast.makeText(RegisterUserActivity.this,"What happened here",Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -100,12 +101,12 @@ public class RegisterUserActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private String displayUserInfo(){
+    private void displayUserInfo(){
 
         Bundle bundle = getIntent().getExtras();
 
         TextView usernameTextView = (TextView) findViewById(R.id.twitterusernametxtview);
-        final EditText editText = (EditText) findViewById(R.id.emailedittxtview);
+        editText = (EditText) findViewById(R.id.emailedittxtview);
         if(bundle.getString("FacebookEmail") != null ) {
             email = bundle.getString("FacebookEmail");
             usernameTextView.setText("Welcome " + bundle.getString("FacebookEmail"));
@@ -121,9 +122,7 @@ public class RegisterUserActivity extends ActionBarActivity {
                 }
             });
             usernameTextView.setText("Welcome " + bundle.getString("TwitterUsername"));
-            email = editText.getText().toString();
         }
-        return email;
 //      ImageView profilePictureImageView = (ImageView) findViewById(R.id.profilepictureimgview);
 //      aQuery.id(R.id.profilepictureimgview).image(bundle.getString("ProfileImageURL"));
     }
