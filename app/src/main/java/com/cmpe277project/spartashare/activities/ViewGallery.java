@@ -33,36 +33,6 @@ public class ViewGallery extends TabActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_gallery);
-
-    /*    TabHost tabHost = getTabHost();
-
-        // Gallary Tab
-        Intent intentGallery = new Intent().setClass(this, ViewGallery.class);
-        TabHost.TabSpec tabSpecGallery = tabHost
-                .newTabSpec("ViewGallery")
-                .setIndicator("ViewGallery")
-                .setContent(intentGallery);
-
-        // Uploads Tab
-        Intent intentUpload = new Intent().setClass(this, UploadImage.class);
-        TabHost.TabSpec tabSpecUploadImage = tabHost
-                .newTabSpec("UploadImage")
-                .setIndicator("UploadImage")
-                .setContent(intentUpload);
-
-        // Uploads Tab
-        Intent intentSharedImages = new Intent().setClass(this, UploadImage.class);
-        TabHost.TabSpec tabSpecSharedImages = tabHost
-                .newTabSpec("UploadImage")
-                .setIndicator("UploadImage")
-                .setContent(intentSharedImages);
-
-        tabHost.addTab(tabSpecGallery);
-        tabHost.addTab(tabSpecUploadImage);
-        tabHost.addTab(tabSpecSharedImages);
-        tabHost.setCurrentTab(1);
-*/
-
         getData();
     }
 

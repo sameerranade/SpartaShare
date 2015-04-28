@@ -28,15 +28,15 @@ public class HomeActivity extends TabActivity {
         // Uploads Tab
         Intent intentUpload = new Intent().setClass(this, UploadImage.class);
         TabHost.TabSpec tabSpecUploadImage = tabHost
-                .newTabSpec("UploadImage")
-                .setIndicator("UploadImage")
+                .newTabSpec("Upload")
+                .setIndicator("Upload")
                 .setContent(intentUpload);
 
         // Uploads Tab
         Intent intentSharedImages = new Intent().setClass(this, ImagesSharedWithMe.class);
         TabHost.TabSpec tabSpecSharedImages = tabHost
-                .newTabSpec("UploadImage")
-                .setIndicator("UploadImage")
+                .newTabSpec("Shared")
+                .setIndicator("Shared")
                 .setContent(intentSharedImages);
 
         tabHost.addTab(tabSpecGallery);
