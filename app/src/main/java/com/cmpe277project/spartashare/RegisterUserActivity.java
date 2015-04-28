@@ -30,6 +30,7 @@ public class RegisterUserActivity extends ActionBarActivity {
 
     String email;
     private EditText editText;
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,10 @@ public class RegisterUserActivity extends ActionBarActivity {
 
                 email = editText.getText().toString();
                 Log.d("Inside Button Click", "Email is "+email);
+                if (email == null || email.equals("")){
+                    email = bundle.getString("FacebookEmail");
+                    Log.d("Inside IF case", "Email is "+email);
+                }
                 BuiltUser user = new BuiltUser();
                 HashMap usrInfo = new HashMap();
 
@@ -103,7 +108,7 @@ public class RegisterUserActivity extends ActionBarActivity {
 
     private void displayUserInfo(){
 
-        Bundle bundle = getIntent().getExtras();
+        bundle = getIntent().getExtras();
 
         TextView usernameTextView = (TextView) findViewById(R.id.twitterusernametxtview);
         editText = (EditText) findViewById(R.id.emailedittxtview);

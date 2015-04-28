@@ -39,8 +39,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_USER_BUILTIOUID = "builtIOUID";
 
 
-
-
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }

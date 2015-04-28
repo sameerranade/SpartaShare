@@ -33,6 +33,7 @@ public class ViewGallery extends TabActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_gallery);
+        System.out.println("Inside OnCreate of ViewGallery");
         getData();
     }
 
@@ -60,6 +61,7 @@ public class ViewGallery extends TabActivity {
 
     private void getData() {
         final ArrayList<UsersImage> imageItems = new ArrayList<UsersImage>();
+        System.out.println("Inside get data");
         /*TypedArray imgs = getResources().obtainTypedArray(R.array.image_ids);
         for (int i = 0; i < imgs.length(); i++) {
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imgs.getResourceId(i, -1));
