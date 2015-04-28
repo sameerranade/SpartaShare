@@ -72,7 +72,7 @@ public class RegisterUserActivity extends ActionBarActivity {
                     public void onAlways() {
                         // write code here that you want to execute
                         // regardless of success or failure of the operation
-                        //Toast.makeText(RegisterUserActivity.this,"What happened here",Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterUserActivity.this,"What happened here",Toast.LENGTH_LONG).show();
                     }
                 });
             }
