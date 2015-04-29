@@ -17,6 +17,8 @@ public class UsersImage {
     private boolean isDir;
     private Bitmap image;
     private BuiltACL acl;
+    private String location;
+    private String tags;
 
     public BuiltACL getAcl() {
         return acl;
@@ -82,4 +84,19 @@ public class UsersImage {
         this.isDir = isDir;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
 }

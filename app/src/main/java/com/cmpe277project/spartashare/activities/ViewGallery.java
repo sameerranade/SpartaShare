@@ -16,6 +16,7 @@ import com.cmpe277project.spartashare.adapters.GalleryGridViewAdapter;
 import com.cmpe277project.spartashare.message.convertor.MessageConverter;
 import com.cmpe277project.spartashare.models.DirectoryInfo;
 import com.cmpe277project.spartashare.models.UsersImage;
+import com.raweng.built.Built;
 import com.raweng.built.BuiltError;
 import com.raweng.built.BuiltObject;
 import com.raweng.built.BuiltQuery;
@@ -34,7 +35,13 @@ public class ViewGallery extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_gallery);
         System.out.println("Inside OnCreate of ViewGallery");
-        getData();
+        //getData();
+        try {
+            Built.initializeWithApiKey(ViewGallery.this, "blt96f850201ab76a1e", "kksv");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

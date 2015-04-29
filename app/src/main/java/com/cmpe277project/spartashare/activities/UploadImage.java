@@ -1,20 +1,50 @@
 package com.cmpe277project.spartashare.activities;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.cmpe277project.spartashare.R;
+import com.cmpe277project.spartashare.util.GetAbsoluteImagePath;
 
-public class UploadImage extends ActionBarActivity {
+public class UploadImage extends Activity {
+    private static final int SELECT_PICTURE = 1;
+    private String selectedImagePath;
+    private Uri selectedImageUri;
+    Button browseImage;
+    Button captureImage;
+    Button uploadImage;
+    ImageView displayImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_image);
+        //setting views
+        browseImage = (Button) findViewById(R.id.btn_uploadFromGallery);
+        captureImage = (Button) findViewById(R.id.btn_uploadFromCamera);
+        uploadImage = (Button) findViewById(R.id.btn_uploadImage);
+        displayImage = (ImageView) findViewById(R.id.iv_imageToUpload);
+        browseImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handleUploadFromGalleryClick();
+            }
+        });
+        uploadImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handleUploadImageClick();
+            }
+        });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -36,5 +66,39 @@ public class UploadImage extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void handleUploadFromGalleryClick() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
+    }
+
+    private void handleUploadImageClick() {
+        if(selectedImagePath!=null){
+            Bundle bundle = new Bundle();
+            bundle.putString("ImageURI", String.valueOf(selectedImageUri));
+            Intent uploadImageWithInfo = new Intent(UploadImage.this, UploadImageWithInfo.class);
+            uploadImageWithInfo.putExtras(bundle);
+            startActivity(uploadImageWithInfo);
+        }
+
+    }
+
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == SELECT_PICTURE) {
+                selectedImageUri = data.getData();
+                selectedImagePath = GetAbsoluteImagePath.getInstance().getPath(UploadImage.this,selectedImageUri);
+                System.out.println("Image Path : " + selectedImageUri.toString());
+                displayImage.setImageURI(selectedImageUri);
+                uploadImage.setVisibility(View.VISIBLE);
+                System.out.println("Image FileName " + GetAbsoluteImagePath.getInstance().getPath(UploadImage.this, selectedImageUri));
+                //uploadImage(GetAbsoluteImagePath.getInstance().getPath(UploadImage.this, selectedImageUri));
+                //getObject();
+            }
+        }
     }
 }

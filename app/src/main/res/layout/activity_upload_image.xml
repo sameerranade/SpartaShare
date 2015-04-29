@@ -11,11 +11,35 @@
         android:orientation="vertical">
         <TextView android:text="Uploads" android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/btn_upload"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Upload Image"/>
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btn_uploadFromGallery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Browse Image"
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/btn_uploadFromCamera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="Capture Image"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/iv_imageToUpload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btn_uploadImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Upload Image"
+            android:visibility="invisible"/>
     </LinearLayout>
 </RelativeLayout>

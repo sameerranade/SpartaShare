@@ -9,4 +9,5 @@
     <string name="title_activity_view_gallery">ViewGallery</string>
     <string name="title_activity_upload_image">UploadImage</string>
     <string name="title_activity_images_shared_with_me">ImagesSharedWithMe</string>
+    <string name="title_activity_upload_image_with_info">UploadImageWithInfo</string>
 </resources>

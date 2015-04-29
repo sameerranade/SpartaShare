@@ -25,6 +25,8 @@ public class MessageConverter {
         usersImage.setImageURL(buildImages.getString("actualimageurl"));
         usersImage.setDirectoryNo(buildImages.getString("dirno"));
         usersImage.setDir(false);
+        usersImage.setLocation(buildImages.getString("imglocation"));
+        usersImage.setTags(buildImages.getString("imgtags"));
         return usersImage;
     }
     //This method is used to create UserImage object for the Albums of user.
