@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.cmpe277project.spartashare.R;
+import com.cmpe277project.spartashare.RegisterUserActivity;
 import com.cmpe277project.spartashare.util.GetAbsoluteImagePath;
 import com.facebook.TestSession;
 import com.raweng.built.BuiltACL;
@@ -110,6 +111,9 @@ public class UploadImageWithInfo extends ActionBarActivity {
         obj.set("actualimage", imageUID);
         obj.set("actualimageurl", imageURL);
         obj.set("dirno","0");
+
+       // BuiltACL acl = new BuiltACL();
+       // acl.setUserWriteAccess(RegisterUserActivity.uid,true);
         //obj.setACL(new BuiltACL().setUserDeleteAccess("blt3561d7fc3b8d68ed",true));
 // "student_name" is the field uid
         obj.save(new BuiltResultCallBack() {

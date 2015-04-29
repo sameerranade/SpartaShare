@@ -70,12 +70,6 @@ public class ViewGallery extends TabActivity {
     private void getData() {
         final ArrayList<UsersImage> imageItems = new ArrayList<UsersImage>();
         System.out.println("Inside get data");
-        /*TypedArray imgs = getResources().obtainTypedArray(R.array.image_ids);
-        for (int i = 0; i < imgs.length(); i++) {
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imgs.getResourceId(i, -1));
-            imageItems.add(new UsersImage());
-        }
-        return imageItems;*/
         BuiltQuery query = new BuiltQuery("images");
         query.exec(new QueryResultsCallBack() {
             @Override

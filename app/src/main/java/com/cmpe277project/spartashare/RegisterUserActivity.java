@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.cmpe277project.spartashare.activities.HomeActivity;
 import com.facebook.widget.ProfilePictureView;
+import com.raweng.built.Built;
 import com.raweng.built.BuiltApplication;
 import com.raweng.built.BuiltError;
 import com.raweng.built.BuiltObject;
@@ -22,12 +23,15 @@ import com.raweng.built.BuiltUser;
 import com.raweng.built.QueryResult;
 import com.raweng.built.QueryResultsCallBack;
 import java.util.HashMap;
+import java.util.List;
 
 public class RegisterUserActivity extends ActionBarActivity {
 
-    String email;
+    public static String email;
+    public static String uid;
     private EditText editText;
     Bundle bundle;
+
 
     private ProfilePictureView user_picture;
     @Override
@@ -58,15 +62,32 @@ public class RegisterUserActivity extends ActionBarActivity {
                 builtQuery.exec(new QueryResultsCallBack() {
                     @Override
                     public void onSuccess(QueryResult queryResult) {
-                        BuiltObject uemail = queryResult.getResultObjects().get(1);
-                        String temp = uemail.getUid();
 
-                        Log.d("Email user activity : ",temp);
+                        for (int i = 0 ; i < queryResult.getCount();i++){
+                            BuiltObject uemail = queryResult.getResultObjects().get(i);
+                            String s = uemail.getUid();
+                            String email = uemail.getString("email");
+                            System.out.println("List of Id :" +s);
+                            System.out.println("List of Email :" +email);
+                        }
+//                        List<BuiltObject> userList = queryResult.getResultObjects();
+
+
+                        /*for (BuiltObject user: userList){
+                            if (user.get("email").equals("samr3samr3@gmail.com")){
+                                Log.d("ResigsterUserActivity", "uid for sameer "+ user.getUid());
+                            }
+                        }*/
+                        //String temp = uemail.getUid();
+
+                        Log.d("RegisterUserActivity","Email:"+email);
+                        Log.d("RegisterUserActivity","Uid:"+uid);
                     }
 
                     @Override
                     public void onError(BuiltError builtError) {
                         Log.d("Error in Query", builtError.getErrorMessage());
+                        //loginUser();
                     }
 
                     @Override
@@ -74,7 +95,6 @@ public class RegisterUserActivity extends ActionBarActivity {
 
                     }
                 });
-
                 usrInfo.put("email", email);
                 usrInfo.put("password", "root123");
                 usrInfo.put("password_confirmation", "root123");
@@ -93,6 +113,7 @@ public class RegisterUserActivity extends ActionBarActivity {
                     public void onError(BuiltError builtErrorObject) {
                         // there was an error in creating the object
                         // builtErrorObject will contain more details
+                        loginUser();
                         Toast.makeText(RegisterUserActivity.this, builtErrorObject.getErrorMessage(), Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(RegisterUserActivity.this, HomeActivity.class);
                         //intent.putExtras(bundle);
@@ -109,6 +130,46 @@ public class RegisterUserActivity extends ActionBarActivity {
             }
         });
     }
+
+    private void loginUser() {
+        final BuiltUser builtUserObject = new BuiltUser();
+        builtUserObject.login(email, "root123", new BuiltResultCallBack() {
+            // here "john@malkovich.com" is a valid email id of your user
+            // and "password", the corresponding password
+            @Override
+            public void onSuccess() {
+                // user has logged in successfully
+                // builtUserObject.authtoken contains the session authtoken
+                Toast.makeText(RegisterUserActivity.this,"Login Successful", Toast.LENGTH_SHORT).show();
+                uid = builtUserObject.getUserUid();
+                email = builtUserObject.getEmailId();
+                Log.d("RegisterUserActivity", "UserID:" + builtUserObject.getUserUid() + " Email" + builtUserObject.getEmailId());
+                Toast.makeText(RegisterUserActivity.this,"Login Successful", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(RegisterUserActivity.this, HomeActivity.class);
+                //intent.putExtras(bundle);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onError(BuiltError builtErrorObject) {
+                // login failed
+
+                // the message, code and details of the error
+                Log.i("error: ", "" + builtErrorObject.getErrorMessage());
+                Log.i("error: ", "" + builtErrorObject.getErrorCode());
+                Log.i("error: ", "" + builtErrorObject.getErrors());
+            }
+
+            @Override
+            public void onAlways() {
+                // write code here that you want to execute
+                // regardless of success or failure of the operation
+            }
+        });
+    }
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
