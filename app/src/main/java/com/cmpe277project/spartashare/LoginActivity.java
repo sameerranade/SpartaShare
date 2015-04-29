@@ -45,6 +45,11 @@ public class LoginActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        TwitterAuthConfig authConfig =
+                new TwitterAuthConfig("ZbXxnF9McAcdEpf3SFkMVlqcm",
+                        "korGqXI6OAVZRyJlNC54imDektcDmvLFNUwn3LxwaFNUgk6ddt");
+        Fabric.with(this, new TwitterCore(authConfig));
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -94,10 +99,7 @@ public class LoginActivity extends ActionBarActivity {
 
     //Twitter Authorization
     private void authorizeUser(){
-        TwitterAuthConfig authConfig =
-                new TwitterAuthConfig("ZbXxnF9McAcdEpf3SFkMVlqcm",
-                        "korGqXI6OAVZRyJlNC54imDektcDmvLFNUwn3LxwaFNUgk6ddt");
-        Fabric.with(this, new TwitterCore(authConfig));
+
 
         loginButton = (TwitterLoginButton)
                 findViewById(R.id.login_button);

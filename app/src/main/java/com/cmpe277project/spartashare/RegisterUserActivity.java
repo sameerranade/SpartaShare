@@ -1,5 +1,6 @@
 package com.cmpe277project.spartashare;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -13,17 +14,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cmpe277project.spartashare.DAO.DatabaseHandler;
 import com.cmpe277project.spartashare.activities.HomeActivity;
+import com.raweng.built.Built;
+import com.raweng.built.BuiltApplication;
 import com.raweng.built.BuiltError;
+import com.raweng.built.BuiltObject;
+import com.raweng.built.BuiltQuery;
 import com.raweng.built.BuiltResultCallBack;
 import com.raweng.built.BuiltUser;
-import com.raweng.built.androidquery.AQuery;
-import com.twitter.sdk.android.Twitter;
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.TwitterException;
-import com.twitter.sdk.android.core.models.User;
-
+import com.raweng.built.QueryResult;
+import com.raweng.built.QueryResultsCallBack;
 import java.util.HashMap;
 
 public class RegisterUserActivity extends ActionBarActivity {
@@ -36,21 +37,47 @@ public class RegisterUserActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
+
+        final DatabaseHandler dbHandler = new DatabaseHandler(RegisterUserActivity.this);
+
         displayUserInfo();
+
         Button button = (Button) findViewById(R.id.registerbtn);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                registerUser(email);
-
                 email = editText.getText().toString();
                 Log.d("Inside Button Click", "Email is "+email);
                 if (email == null || email.equals("")){
                     email = bundle.getString("FacebookEmail");
                     Log.d("Inside IF case", "Email is "+email);
                 }
-                BuiltUser user = new BuiltUser();
-                HashMap usrInfo = new HashMap();
+
+                final BuiltUser user = new BuiltUser();
+                final HashMap usrInfo = new HashMap();
+
+                BuiltApplication app = new BuiltApplication();
+                BuiltQuery builtQuery = app.getUsersQuery();
+                builtQuery.exec(new QueryResultsCallBack() {
+                    @Override
+                    public void onSuccess(QueryResult queryResult) {
+                        BuiltObject uemail = queryResult.getResultObjects().get(1);
+                        String temp = uemail.getUid();
+
+                        Log.d("Email user activity : ",temp);
+                    }
+
+                    @Override
+                    public void onError(BuiltError builtError) {
+                        Log.d("Error in Query", builtError.getErrorMessage());
+                    }
+
+                    @Override
+                    public void onAlways() {
+
+                    }
+                });
+
 
                 usrInfo.put("email", email);
                 usrInfo.put("password", "root123");
@@ -60,7 +87,7 @@ public class RegisterUserActivity extends ActionBarActivity {
                     @Override
                     public void onSuccess() {
                         // object is created successfully
-                        Toast.makeText(RegisterUserActivity.this,"Registered successfully",Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterUserActivity.this, "Registered successfully", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(RegisterUserActivity.this, HomeActivity.class);
                         //intent.putExtras(bundle);
                         startActivity(intent);
@@ -70,20 +97,22 @@ public class RegisterUserActivity extends ActionBarActivity {
                     public void onError(BuiltError builtErrorObject) {
                         // there was an error in creating the object
                         // builtErrorObject will contain more details
-                        Toast.makeText(RegisterUserActivity.this,builtErrorObject.getErrorMessage(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterUserActivity.this, builtErrorObject.getErrorMessage(), Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(RegisterUserActivity.this, HomeActivity.class);
+                        //intent.putExtras(bundle);
+                        startActivity(intent);
                     }
 
                     @Override
                     public void onAlways() {
                         // write code here that you want to execute
                         // regardless of success or failure of the operation
-                        Toast.makeText(RegisterUserActivity.this,"What happened here",Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterUserActivity.this, "What happened here", Toast.LENGTH_LONG).show();
                     }
                 });
             }
         });
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -112,10 +141,10 @@ public class RegisterUserActivity extends ActionBarActivity {
 
         TextView usernameTextView = (TextView) findViewById(R.id.twitterusernametxtview);
         editText = (EditText) findViewById(R.id.emailedittxtview);
+
         if(bundle.getString("FacebookEmail") != null ) {
             email = bundle.getString("FacebookEmail");
             usernameTextView.setText("Welcome " + bundle.getString("FacebookEmail"));
-
         }
         else
         {
@@ -130,10 +159,5 @@ public class RegisterUserActivity extends ActionBarActivity {
         }
 //      ImageView profilePictureImageView = (ImageView) findViewById(R.id.profilepictureimgview);
 //      aQuery.id(R.id.profilepictureimgview).image(bundle.getString("ProfileImageURL"));
-    }
-
-    private void registerUser(String email){
-
-
     }
 }
