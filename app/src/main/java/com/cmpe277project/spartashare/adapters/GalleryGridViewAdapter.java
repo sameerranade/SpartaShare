@@ -10,8 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cmpe277project.spartashare.R;
+import com.cmpe277project.spartashare.activities.ViewGallery;
 import com.cmpe277project.spartashare.models.UsersImage;
 import com.cmpe277project.spartashare.util.LoadImage;
+import com.raweng.built.androidquery.AQuery;
 
 import java.util.ArrayList;
 
@@ -49,7 +51,10 @@ public class GalleryGridViewAdapter extends ArrayAdapter {
         UsersImage item = (UsersImage) data.get(position);
         holder.imageTitle.setText(item.getCaption());
         //holder.image.setImageBitmap(item.getImage());
-        new LoadImage(holder.image, item.getImageURL());
+        //new LoadImage(holder.image, item.getImageURL());
+        AQuery androidQuery = new AQuery(holder.image);
+//fetch and set the image from internet, cache with file and memory
+        androidQuery.id(holder.image).image(item.getImageURL());
         return row;
     }
 

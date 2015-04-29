@@ -35,14 +35,15 @@ public class ViewGallery extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_gallery);
         System.out.println("Inside OnCreate of ViewGallery");
-        //getData();
         try {
             Built.initializeWithApiKey(ViewGallery.this, "blt96f850201ab76a1e", "kksv");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+        getData();
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -91,6 +92,7 @@ public class ViewGallery extends TabActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }*/
+                System.out.println("Number of Images in imageItems " + imageItems.size());
                 populateGridView(imageItems);
             }
 
@@ -124,5 +126,12 @@ public class ViewGallery extends TabActivity {
         gridView = (GridView) findViewById(R.id.gridView);
         gridAdapter = new GalleryGridViewAdapter(ViewGallery.this, R.layout.gallary_grid_layout_item, ui);
         gridView.setAdapter(gridAdapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getData();
+
     }
 }

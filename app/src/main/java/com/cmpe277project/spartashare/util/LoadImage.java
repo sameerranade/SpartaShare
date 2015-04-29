@@ -20,7 +20,7 @@ public class LoadImage extends AsyncTask<String, Void, Bitmap> {
     }
 
     protected Bitmap doInBackground(String... urls) {
-        Log.d("In AsyncTask 2", "URL:" + urls.toString());
+        Log.d("In AsyncTask ", "URL:" + urls.toString());
         String urldisplay = urls[0];
         System.out.println(urls[0]);
         Bitmap mIcon11 = null;
