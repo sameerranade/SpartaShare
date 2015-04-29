@@ -114,10 +114,10 @@ public class RegisterUserActivity extends ActionBarActivity {
                         // there was an error in creating the object
                         // builtErrorObject will contain more details
                         loginUser();
-                        Toast.makeText(RegisterUserActivity.this, builtErrorObject.getErrorMessage(), Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(RegisterUserActivity.this, HomeActivity.class);
+                        //Toast.makeText(RegisterUserActivity.this, builtErrorObject.getErrorMessage(), Toast.LENGTH_LONG).show();
+                        //Intent intent = new Intent(RegisterUserActivity.this, HomeActivity.class);
                         //intent.putExtras(bundle);
-                        startActivity(intent);
+                        //startActivity(intent);
                     }
 
                     @Override
