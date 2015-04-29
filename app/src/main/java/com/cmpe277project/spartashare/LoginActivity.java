@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.facebook.Request;
 import com.facebook.Response;
@@ -20,6 +19,7 @@ import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
 import com.raweng.built.Built;
+
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
@@ -27,7 +27,6 @@ import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -99,7 +98,6 @@ public class LoginActivity extends ActionBarActivity {
 
     //Twitter Authorization
     private void authorizeUser(){
-
 
         loginButton = (TwitterLoginButton)
                 findViewById(R.id.login_button);
@@ -176,9 +174,10 @@ public class LoginActivity extends ActionBarActivity {
                 public void onCompleted(GraphUser user, Response response) {
                     if (user != null) {
                         // Set view visibility to true
+
                         Bundle bundle = new Bundle();
                         bundle.putString("FacebookEmail",user.getProperty("email").toString());
-
+                        bundle.putString("FacebookID", user.getId() );
                         Intent intent = new Intent(LoginActivity.this, RegisterUserActivity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);

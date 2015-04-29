@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="20sp"
-        android:textSize="25sp"
+        android:textSize="18sp"
         android:textColor="#ffffff"
         android:id="@+id/twitterusernametxtview" />
 
@@ -39,5 +39,23 @@
         android:text="Continue to Register"
         android:layout_marginTop="140sp"
         android:layout_centerHorizontal="true"
+        />
+
+    <ImageView
+        android:layout_width="80sp"
+        android:layout_height="80sp"
+        android:id="@+id/profilepicimageview"
+        android:layout_marginRight="30sp"
+        android:layout_alignTop="@+id/twitterusernametxtview"
+        android:layout_alignParentEnd="true"
+        />
+
+    <com.facebook.widget.ProfilePictureView
+        android:id="@+id/userImage"
+        android:layout_width="80sp"
+        android:layout_height="80sp"
+        android:layout_marginRight="30sp"
+        android:layout_alignTop="@+id/twitterusernametxtview"
+        android:layout_alignParentEnd="true"
         />
 </RelativeLayout>

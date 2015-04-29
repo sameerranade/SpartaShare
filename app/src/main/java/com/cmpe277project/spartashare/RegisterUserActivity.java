@@ -1,6 +1,5 @@
 package com.cmpe277project.spartashare;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -10,13 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.cmpe277project.spartashare.DAO.DatabaseHandler;
 import com.cmpe277project.spartashare.activities.HomeActivity;
-import com.raweng.built.Built;
+import com.facebook.widget.ProfilePictureView;
 import com.raweng.built.BuiltApplication;
 import com.raweng.built.BuiltError;
 import com.raweng.built.BuiltObject;
@@ -33,12 +29,13 @@ public class RegisterUserActivity extends ActionBarActivity {
     private EditText editText;
     Bundle bundle;
 
+    private ProfilePictureView user_picture;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
 
-        final DatabaseHandler dbHandler = new DatabaseHandler(RegisterUserActivity.this);
+        user_picture = (ProfilePictureView)findViewById(R.id.userImage);
 
         displayUserInfo();
 
@@ -77,7 +74,6 @@ public class RegisterUserActivity extends ActionBarActivity {
 
                     }
                 });
-
 
                 usrInfo.put("email", email);
                 usrInfo.put("password", "root123");
@@ -144,7 +140,9 @@ public class RegisterUserActivity extends ActionBarActivity {
 
         if(bundle.getString("FacebookEmail") != null ) {
             email = bundle.getString("FacebookEmail");
+            user_picture.setProfileId(bundle.getString("FacebookID"));
             usernameTextView.setText("Welcome " + bundle.getString("FacebookEmail"));
+
         }
         else
         {
