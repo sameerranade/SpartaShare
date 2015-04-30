@@ -5,31 +5,16 @@ package com.cmpe277project.spartashare.models;
  */
 public class Directory {
     //private variables
-    int directoryID;
     String directoryName;
-    String directoryURL;
-
-    public Directory(int directoryID, String directoryName, String directoryURL) {
-        this.directoryID = directoryID;
-        this.directoryName = directoryName;
-        this.directoryURL = directoryURL;
-    }
+    String userName;
 
     public Directory() {
 
     }
 
-    public Directory(String directoryName, String directoryURL) {
+    public Directory(String directoryName, String userName) {
         this.directoryName = directoryName;
-        this.directoryURL = directoryURL;
-    }
-
-    public int getDirectoryID() {
-        return directoryID;
-    }
-
-    public void setDirectoryID(int directoryID) {
-        this.directoryID = directoryID;
+        this.userName = userName;
     }
 
     public String getDirectoryName() {
@@ -40,11 +25,11 @@ public class Directory {
         this.directoryName = directoryName;
     }
 
-    public String getDirectoryURL() {
-        return directoryURL;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setDirectoryURL(String directoryURL) {
-        this.directoryURL = directoryURL;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

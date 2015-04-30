@@ -1,20 +1,28 @@
 package com.cmpe277project.spartashare.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.media.ExifInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.cmpe277project.spartashare.DAO.DatabaseHandler;
 import com.cmpe277project.spartashare.R;
 import com.cmpe277project.spartashare.RegisterUserActivity;
+import com.cmpe277project.spartashare.models.Directory;
+import com.cmpe277project.spartashare.models.DirectoryInfo;
 import com.cmpe277project.spartashare.util.GetAbsoluteImagePath;
 import com.facebook.TestSession;
 import com.raweng.built.BuiltACL;
@@ -28,6 +36,8 @@ import android.net.Uri;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class UploadImageWithInfo extends ActionBarActivity {
@@ -36,9 +46,11 @@ public class UploadImageWithInfo extends ActionBarActivity {
     EditText caption;
     TextView location;
     EditText tags;
-    Spinner directory;
+    Spinner spinner;
     ImageView uploadImage;
     Button upload;
+    String albumName = "Select Album";
+    DatabaseHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +61,83 @@ public class UploadImageWithInfo extends ActionBarActivity {
         caption = (EditText) findViewById(R.id.et_caption);
         location = (TextView) findViewById(R.id.et_location);
         tags = (EditText) findViewById(R.id.et_tags);
-        directory = (Spinner) findViewById(R.id.sr_directory);
+        spinner = (Spinner) findViewById(R.id.sr_directory);
         uploadImage = (ImageView) findViewById(R.id.iv_uploadImage);
         imageUri = Uri.parse(bundle.getString("ImageURI"));
         uploadImage.setImageURI(imageUri);
         System.out.println("Inside UploadImageWithInfo onCreate");
         imagePath = GetAbsoluteImagePath.getInstance().getPath(UploadImageWithInfo.this, imageUri);
+        db = new DatabaseHandler(this);
+        Log.d("UploadImage", "above get all Directories");
+        List<Directory> directories = db.getAllDirectories(RegisterUserActivity.email);
+        List<String> directoryNames = new ArrayList<String>();
+        directoryNames.add("Select Album");
+        directoryNames.add("Create New Album");
+        Log.d("UploadImage", "Above Directories");
+        for (Directory cn : directories) {
+            Log.d("UploadImage", "Inside Directories" + cn.getDirectoryName());
+            String log = cn.getDirectoryName();
+            directoryNames.add(log);
+        }
+        ArrayAdapter dataAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, directoryNames);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position > 1) {
+                    albumName = parent.getItemAtPosition(position).toString();
+                    Toast.makeText(parent.getContext(), "Selected Directory : " + parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+                } else {
+                    if (position == 1) {
+                        LayoutInflater li = LayoutInflater.from(UploadImageWithInfo.this);
+                        View promptsView = li.inflate(R.layout.prompts, null);
+
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(UploadImageWithInfo.this);
+                        alertDialogBuilder.setView(promptsView);
+                        final EditText userInput = (EditText) promptsView
+                                .findViewById(R.id.editTextDialogUserInput);
+                        // set title
+                        alertDialogBuilder.setTitle("Create New Album");
+
+                        // set dialog message
+                        alertDialogBuilder
+                                .setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        // if this button is clicked, close
+                                        // current activity
+                                        albumName = userInput.getText().toString();
+                                        Directory directory = new Directory(albumName, RegisterUserActivity.email);
+                                        db.addDirectory(directory);
+                                        handleUploadClick(imagePath);
+                                    }
+                                })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        // if this button is clicked, just close
+                                        // the dialog box and do nothing
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        // create alert dialog
+                        AlertDialog alertDialog = alertDialogBuilder.create();
+
+                        // show it
+                        alertDialog.show();
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         upload = (Button) findViewById(R.id.btn_upload);
         getImageMetadata();
         upload.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +196,8 @@ public class UploadImageWithInfo extends ActionBarActivity {
         obj.set("imgtags", tags.getText().toString());
         obj.set("actualimage", imageUID);
         obj.set("actualimageurl", imageURL);
-        obj.set("dirno","0");
+        Log.d("UploadDicrectory","album name " + albumName);
+        obj.set("directory", albumName);
 
        // BuiltACL acl = new BuiltACL();
        // acl.setUserWriteAccess(RegisterUserActivity.uid,true);

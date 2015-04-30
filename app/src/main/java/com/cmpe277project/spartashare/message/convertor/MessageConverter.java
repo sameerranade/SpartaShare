@@ -2,6 +2,7 @@ package com.cmpe277project.spartashare.message.convertor;
 
 import android.os.Bundle;
 
+import com.cmpe277project.spartashare.models.Directory;
 import com.cmpe277project.spartashare.models.DirectoryInfo;
 import com.cmpe277project.spartashare.models.UsersImage;
 import com.raweng.built.BuiltObject;
@@ -34,14 +35,11 @@ public class MessageConverter {
     //This method is used to create UserImage object for the Albums of user.
     //It will use default folderimage.png as image attached to it
     //
-    public UsersImage createImages(DirectoryInfo dirInfo){
+    public UsersImage createImages(Directory dirInfo){
         UsersImage usersImage = new UsersImage();
-
-        usersImage.setCaption(dirInfo.getName());
+        usersImage.setCaption(dirInfo.getDirectoryName());
+        usersImage.setImageURL("https://api.built.io/v1/uploads/553d74b11d2d6dc27e6a5584/download");
         usersImage.setDir(true);
-        usersImage.setDirectoryNo(dirInfo.getDirNo());
-        usersImage.setImageURL(dirInfo.getUrl());
-
         return usersImage;
     }
 

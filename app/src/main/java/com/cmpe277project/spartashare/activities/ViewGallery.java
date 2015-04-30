@@ -15,9 +15,12 @@ import android.widget.GridView;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+import com.cmpe277project.spartashare.DAO.DatabaseHandler;
 import com.cmpe277project.spartashare.R;
+import com.cmpe277project.spartashare.RegisterUserActivity;
 import com.cmpe277project.spartashare.adapters.GalleryGridViewAdapter;
 import com.cmpe277project.spartashare.message.convertor.MessageConverter;
+import com.cmpe277project.spartashare.models.Directory;
 import com.cmpe277project.spartashare.models.DirectoryInfo;
 import com.cmpe277project.spartashare.models.UsersImage;
 import com.google.gson.Gson;
@@ -34,6 +37,7 @@ import java.util.List;
 public class ViewGallery extends TabActivity {
     private GridView gridView;
     private GalleryGridViewAdapter gridAdapter;
+    private DatabaseHandler db = new DatabaseHandler(ViewGallery.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +62,13 @@ public class ViewGallery extends TabActivity {
                     startActivity(intent);
                 }
                 else if(item.isDir()){
-                    getDictionaryData(item.getDirectoryNo());
+                    getDictionaryData(item.getCaption());
                 }
 
                 //Toast.makeText(ViewGallery.this,"Clicked on Item " + position + "Item " + item.isDir(), Toast.LENGTH_SHORT ).show();
             }
         });
-        getDictionaryData("0");
+        getDictionaryData("Select Album");
     }
 
     @Override
@@ -99,7 +103,7 @@ public class ViewGallery extends TabActivity {
             public void onSuccess(QueryResult queryResult) {
                 //fetching Directories first
 
-                if (directoryNo.equals("0")) {
+                if (directoryNo.equals("Select Album")) {
                     ArrayList<UsersImage> dirList = getDirList();
                     imageItems.addAll(dirList);
                 }
@@ -133,12 +137,15 @@ public class ViewGallery extends TabActivity {
     //modify the method to fetch dir from DB.
     private ArrayList<UsersImage> getDirList() {
         ArrayList<UsersImage> localList = new ArrayList<UsersImage>();
-        for (int i = 1; i < 4; i++) {
+        /*for (int i = 1; i < 4; i++) {
             DirectoryInfo dir = new DirectoryInfo();
             dir.setName("DirectoryNo_" + i);
             dir.setDirNo(String.valueOf(i));
             localList.add(MessageConverter.getInstance().createImages(dir));
-        }
+        }*/
+        List<Directory> dirList = db.getAllDirectories(RegisterUserActivity.email);
+        for(Directory dir: dirList)
+            localList.add(MessageConverter.getInstance().createImages(dir));
         return localList;
     }
 
@@ -163,7 +170,7 @@ public class ViewGallery extends TabActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        getDictionaryData("0");
+        getDictionaryData("Select Album");
 
     }
 }

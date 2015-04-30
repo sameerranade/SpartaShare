@@ -46,14 +46,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_DIRECTORIES_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_DIRECTORIES + "("
-                + KEY_DIR_ID + " INTEGER PRIMARY KEY," + KEY_DIR_NAME + " TEXT,"
+                + KEY_DIR_NAME + " TEXT, "
                 + KEY_DIR_URL + " TEXT" + ")";
         db.execSQL(CREATE_DIRECTORIES_TABLE);
 
-        String CREATE_USER_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_USER + "("
-                + KEY_USER_ID + " INTEGER PRIMARY KEY," + KEY_USER_USERNAME + " TEXT,"
+        /*String CREATE_USER_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_USER + "("
+                + KEY_USER_ID + " INTEGER AUTOINCREMENT," + KEY_USER_USERNAME + " TEXT,"
                 + KEY_USER_EMAIL + " TEXT" + KEY_USER_BUILTIOUID + "TEXT" + ")";
-        db.execSQL(CREATE_USER_TABLE);
+        db.execSQL(CREATE_USER_TABLE);*/
     }
 
     @Override
@@ -70,12 +70,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      */
 
     // Adding new directory
-    void addDirectory(Directory contact) {
+    public void addDirectory(Directory contact) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(KEY_DIR_NAME, contact.getDirectoryName()); // Directory Name
-        values.put(KEY_DIR_URL, contact.getDirectoryURL()); // Directory Phone
+        values.put(KEY_DIR_URL, contact.getUserName()); // Directory Phone
 
         // Inserting Row
         db.insert(TABLE_DIRECTORIES, null, values);
@@ -83,7 +83,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Getting single directory
-    Directory getDirectory(int id) {
+/*    Directory getDirectory(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_DIRECTORIES, new String[] {KEY_DIR_ID,
@@ -92,17 +92,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        Directory directory = new Directory(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2));
+        Directory directory = new Directory(cursor.getString(0),
+                cursor.getString(1));
         // return Directory
         return directory;
-    }
+    }*/
 
     // Getting All Directories
-    public List<Directory> getAllDirectories() {
+    public List<Directory> getAllDirectories( String userName) {
         List<Directory> directoryList = new ArrayList<Directory>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_DIRECTORIES;
+        String selectQuery = "SELECT " + KEY_DIR_NAME + ", " + KEY_DIR_URL + " FROM " + TABLE_DIRECTORIES
+                + " WHERE " + KEY_DIR_URL + " = " + "\"" + userName + "\"";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -111,9 +112,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Directory directory = new Directory();
-                directory.setDirectoryID(Integer.parseInt(cursor.getString(0)));
-                directory.setDirectoryName(cursor.getString(1));
-                directory.setDirectoryURL(cursor.getString(2));
+                directory.setDirectoryName(cursor.getString(0));
+                directory.setUserName(cursor.getString(1));
                 // Adding directory to list
                 directoryList.add(directory);
             } while (cursor.moveToNext());
@@ -123,26 +123,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return directoryList;
     }
 
-    // Updating single directory
+/*    // Updating single directory
     public int updateDirectory(Directory contact) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(KEY_DIR_NAME, contact.getDirectoryName());
-        values.put(KEY_DIR_URL, contact.getDirectoryURL());
+        values.put(KEY_DIR_URL, contact.getUserName());
 
         // updating row
         return db.update(TABLE_DIRECTORIES, values, KEY_DIR_ID + " = ?",
                 new String[] { String.valueOf(contact.getDirectoryID()) });
-    }
+    }*/
 
     // Deleting single contact
-    public void deleteDirectory(Directory directory) {
+  /*  public void deleteDirectory(Directory directory) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_DIRECTORIES, KEY_DIR_ID + " = ?",
                 new String[] { String.valueOf(directory.getDirectoryID()) });
         db.close();
-    }
+    }*/
 
 
     // Getting contacts Count
@@ -156,6 +156,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cursor.getCount();
     }
 
+/*
     void addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -184,5 +185,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return user;
     }
 
+*/
 
 }
