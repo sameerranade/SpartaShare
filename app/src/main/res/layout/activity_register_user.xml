@@ -10,11 +10,11 @@
     <TextView android:text="Welcome sameerranade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="20sp"
         android:textSize="18sp"
         android:textColor="#ffffff"
-        android:id="@+id/twitterusernametxtview" />
+        android:layout_marginTop="120sp"
+        android:id="@+id/twitterusernametxtview"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -24,11 +24,11 @@
         android:width="350sp"
         android:textSize="20sp"
         android:textColor="#ffffff"
-        android:layout_marginTop="60sp"
+        android:layout_marginTop="200sp"
         android:hint = "Please enter your email address"
         android:textColorHint="#ffffff"
         android:visibility="invisible"
-        />
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:background="#999999"
@@ -37,25 +37,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/registerbtn"
         android:text="Continue to Register"
-        android:layout_marginTop="140sp"
+        android:layout_below="@+id/userImage"
         android:layout_centerHorizontal="true"
-        />
-
-    <ImageView
-        android:layout_width="80sp"
-        android:layout_height="80sp"
-        android:id="@+id/profilepicimageview"
-        android:layout_marginRight="30sp"
-        android:layout_alignTop="@+id/twitterusernametxtview"
-        android:layout_alignParentEnd="true"
-        />
+        android:layout_marginTop="41dp" />
 
     <com.facebook.widget.ProfilePictureView
         android:id="@+id/userImage"
-        android:layout_width="80sp"
-        android:layout_height="80sp"
-        android:layout_marginRight="30sp"
-        android:layout_alignTop="@+id/twitterusernametxtview"
-        android:layout_alignParentEnd="true"
-        />
+        android:layout_width="120sp"
+        android:layout_height="120sp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

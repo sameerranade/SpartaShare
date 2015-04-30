@@ -4,11 +4,13 @@ import android.app.TabActivity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TabHost;
 
 import com.cmpe277project.spartashare.R;
+import com.cmpe277project.spartashare.RegisterUserActivity;
 
 public class HomeActivity extends TabActivity {
 
@@ -17,6 +19,10 @@ public class HomeActivity extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home2);
         Bundle bundle = getIntent().getExtras();
+
+        RegisterUserActivity regUser = new RegisterUserActivity();
+        String email = regUser.email;
+        Log.d("email",email);
 
         TabHost tabHost = getTabHost();
 
@@ -51,7 +57,6 @@ public class HomeActivity extends TabActivity {
             else{
                 tabHost.setCurrentTab(0);
             }
-
         }
         else {
             tabHost.setCurrentTab(0);

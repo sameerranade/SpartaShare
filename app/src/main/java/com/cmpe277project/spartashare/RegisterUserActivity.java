@@ -57,33 +57,6 @@ public class RegisterUserActivity extends ActionBarActivity {
                 final BuiltUser user = new BuiltUser();
                 final HashMap usrInfo = new HashMap();
 
-                BuiltApplication app = new BuiltApplication();
-                BuiltQuery builtQuery = app.getUsersQuery();
-                builtQuery.exec(new QueryResultsCallBack() {
-                    @Override
-                    public void onSuccess(QueryResult queryResult) {
-
-                        for (int i = 0 ; i < queryResult.getCount();i++){
-                            BuiltObject uemail = queryResult.getResultObjects().get(i);
-                            String s = uemail.getUid();
-                            String email = uemail.getString("email");
-                            System.out.println("List of Id :" +s);
-                            System.out.println("List of Email :" +email);
-                        }
-                        Log.d("RegisterUserActivity","Email:"+email);
-                        Log.d("RegisterUserActivity","Uid:"+uid);
-                    }
-
-                    @Override
-                    public void onError(BuiltError builtError) {
-                        Log.d("Error in Query", builtError.getErrorMessage());
-                    }
-
-                    @Override
-                    public void onAlways() {
-
-                    }
-                });
                 usrInfo.put("email", email);
                 usrInfo.put("password", "root123");
                 usrInfo.put("password_confirmation", "root123");
@@ -93,6 +66,7 @@ public class RegisterUserActivity extends ActionBarActivity {
                     public void onSuccess() {
                         // object is created successfully
                         Toast.makeText(RegisterUserActivity.this, "Registered successfully", Toast.LENGTH_LONG).show();
+                        loginUser();
                         Intent intent = new Intent(RegisterUserActivity.this, HomeActivity.class);
                         //intent.putExtras(bundle);
                         startActivity(intent);
@@ -192,6 +166,7 @@ public class RegisterUserActivity extends ActionBarActivity {
         }
         else
         {
+            user_picture.setVisibility(View.INVISIBLE);
             editText.setVisibility(View.VISIBLE);
             editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
