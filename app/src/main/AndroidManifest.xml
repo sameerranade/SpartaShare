@@ -89,6 +89,9 @@
             android:name=".activities.ViewImage"
             android:label="@string/title_activity_view_image" >
         </activity>
+        <activity android:name=".activities.EditPhotoActivity"
+            android:label="SpartaShare">
+            </activity>
     </application>
 
 </manifest>

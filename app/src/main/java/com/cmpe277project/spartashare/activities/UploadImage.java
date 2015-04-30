@@ -116,10 +116,10 @@ public class UploadImage extends Activity {
                 Bitmap bmp = (Bitmap) extras.get("data");
 //                String selectedImagePath = getPath(data.getData());
                 System.out.println(bmp);
-                /*Intent intent = new Intent(this, EditPhotoActivity.class);
+                Intent intent = new Intent(UploadImage.this, EditPhotoActivity.class);
                 intent.putExtra("BitmapImage", bmp);
                 intent.putExtra("ImagePath", selectedImagePath);
-                startActivity(intent);*/
+                startActivity(intent);
             }
         }
     }

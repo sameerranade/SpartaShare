@@ -16,6 +16,8 @@ public class HomeActivity extends TabActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home2);
+        Bundle bundle = getIntent().getExtras();
+
         TabHost tabHost = getTabHost();
 
         // Gallary Tab
@@ -32,7 +34,7 @@ public class HomeActivity extends TabActivity {
                 .setIndicator("Upload")
                 .setContent(intentUpload);
 
-        // Uploads Tab
+        // Share Tab
         Intent intentSharedImages = new Intent().setClass(this, ImagesSharedWithMe.class);
         TabHost.TabSpec tabSpecSharedImages = tabHost
                 .newTabSpec("Shared")
@@ -42,9 +44,19 @@ public class HomeActivity extends TabActivity {
         tabHost.addTab(tabSpecGallery);
         tabHost.addTab(tabSpecUploadImage);
         tabHost.addTab(tabSpecSharedImages);
-        tabHost.setCurrentTab(0);
-    }
+        if(bundle!= null){
+            if(bundle.getString("TabNo")!= null){
+                tabHost.setCurrentTab(Integer.parseInt(bundle.getString("TabNo")));
+            }
+            else{
+                tabHost.setCurrentTab(0);
+            }
 
+        }
+        else {
+            tabHost.setCurrentTab(0);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
