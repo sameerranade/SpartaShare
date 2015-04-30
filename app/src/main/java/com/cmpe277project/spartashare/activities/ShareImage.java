@@ -131,7 +131,8 @@ public class ShareImage extends ActionBarActivity {
 
         builtObject.upsert(searchCriteria);
         //builtObject.set(replaceCriteria);
-        builtObject.setACL(new BuiltACL().setUserWriteAccess(otherUsersUID, true));
+        //builtObject.setACL(new BuiltACL().setUserWriteAccess(otherUsersUID, true));
+        builtObject.setACL(new BuiltACL().setUserReadAccess(otherUsersUID, true));
 
         builtObject.save(new BuiltResultCallBack() {
             @Override
@@ -173,4 +174,5 @@ public class ShareImage extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
