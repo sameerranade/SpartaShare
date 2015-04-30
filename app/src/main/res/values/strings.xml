@@ -11,4 +11,5 @@
     <string name="title_activity_images_shared_with_me">ImagesSharedWithMe</string>
     <string name="title_activity_upload_image_with_info">UploadImageWithInfo</string>
     <string name="title_activity_view_image">ViewImage</string>
+    <string name="title_activity_share_image">ShareImage</string>
 </resources>

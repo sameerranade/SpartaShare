@@ -4,15 +4,25 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.GridView;
 
 import com.cmpe277project.spartashare.R;
+import com.cmpe277project.spartashare.adapters.GalleryGridViewAdapter;
 
 public class ImagesSharedWithMe extends ActionBarActivity {
+    private GridView gridView;
+    private GalleryGridViewAdapter gridAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_images_shared_with_me);
+        gridView = (GridView) findViewById(R.id.iswm_gridView);
+        fetchImagesSharedWithMe();
+    }
+
+    private void fetchImagesSharedWithMe() {
+
     }
 
 

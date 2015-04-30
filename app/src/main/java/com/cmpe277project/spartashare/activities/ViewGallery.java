@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TabHost;
 import android.widget.Toast;
@@ -38,6 +39,8 @@ public class ViewGallery extends TabActivity {
     private GridView gridView;
     private GalleryGridViewAdapter gridAdapter;
     private DatabaseHandler db = new DatabaseHandler(ViewGallery.this);
+    private Button share;
+    private String directoryName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,8 @@ public class ViewGallery extends TabActivity {
                     startActivity(intent);
                 }
                 else if(item.isDir()){
+                    share.setVisibility(View.VISIBLE);
+                    directoryName = item.getCaption();
                     getDictionaryData(item.getCaption());
                 }
 
@@ -69,6 +74,18 @@ public class ViewGallery extends TabActivity {
             }
         });
         getDictionaryData("Select Album");
+
+        share = (Button) findViewById(R.id.btn_vg_share);
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("albumName", directoryName);
+                Intent intent = new Intent(ViewGallery.this, ShareImage.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
