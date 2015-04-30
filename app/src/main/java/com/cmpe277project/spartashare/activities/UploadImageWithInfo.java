@@ -1,5 +1,6 @@
 package com.cmpe277project.spartashare.activities;
 
+import android.media.ExifInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,12 +27,14 @@ import com.raweng.built.BuiltResultCallBack;
 import android.net.Uri;
 import android.widget.Toast;
 
+import java.io.IOException;
+
 
 public class UploadImageWithInfo extends ActionBarActivity {
     Uri imageUri;
     String imagePath;
     EditText caption;
-    EditText location;
+    TextView location;
     EditText tags;
     Spinner directory;
     ImageView uploadImage;
@@ -42,10 +45,9 @@ public class UploadImageWithInfo extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_image_with_info);
         Bundle bundle = getIntent().getExtras();
-        TextView tv = (TextView) findViewById(R.id.txt);
-        tv.setText(bundle.getString("ImageURI"));
+
         caption = (EditText) findViewById(R.id.et_caption);
-        location = (EditText) findViewById(R.id.et_location);
+        location = (TextView) findViewById(R.id.et_location);
         tags = (EditText) findViewById(R.id.et_tags);
         directory = (Spinner) findViewById(R.id.sr_directory);
         uploadImage = (ImageView) findViewById(R.id.iv_uploadImage);
@@ -54,6 +56,7 @@ public class UploadImageWithInfo extends ActionBarActivity {
         System.out.println("Inside UploadImageWithInfo onCreate");
         imagePath = GetAbsoluteImagePath.getInstance().getPath(UploadImageWithInfo.this, imageUri);
         upload = (Button) findViewById(R.id.btn_upload);
+        getImageMetadata();
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -165,5 +168,49 @@ public class UploadImageWithInfo extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void getImageMetadata(){
+        ExifInterface exif = null;
+        try {
+            exif = new ExifInterface(imagePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //ShowExif(exif);
+        String myAttribute="Exif information ---\n";
+        String locationInfo = "\n";
+        myAttribute += getTagString(ExifInterface.TAG_DATETIME, exif);
+
+        myAttribute += getTagString(ExifInterface.TAG_FLASH, exif);
+
+        myAttribute += getTagString(ExifInterface.TAG_GPS_LATITUDE, exif);
+        myAttribute += getTagString(ExifInterface.TAG_GPS_LATITUDE_REF, exif);
+        myAttribute += getTagString(ExifInterface.TAG_GPS_LONGITUDE, exif);
+        myAttribute += getTagString(ExifInterface.TAG_GPS_LONGITUDE_REF, exif);
+        myAttribute += getTagString(ExifInterface.TAG_IMAGE_LENGTH, exif);
+        myAttribute += getTagString(ExifInterface.TAG_IMAGE_WIDTH, exif);
+        myAttribute += getTagString(ExifInterface.TAG_MAKE, exif);
+        myAttribute += getTagString(ExifInterface.TAG_MODEL, exif);
+        myAttribute += getTagString(ExifInterface.TAG_ORIENTATION, exif);
+        myAttribute += getTagString(ExifInterface.TAG_WHITE_BALANCE, exif);
+        System.out.println(myAttribute);
+
+        locationInfo += getTagString(ExifInterface.TAG_GPS_LATITUDE,exif);
+        locationInfo += getTagString(ExifInterface.TAG_GPS_LATITUDE_REF,exif);
+        locationInfo += getTagString(ExifInterface.TAG_GPS_LONGITUDE,exif);
+        locationInfo += getTagString(ExifInterface.TAG_GPS_LONGITUDE_REF,exif);
+        setLocationTextView(locationInfo);
+        //myTextView.setText(myAttribute);
+
+    }
+
+    private void setLocationTextView(String locInfo){
+        location.setText(locInfo);
+    }
+
+    private String getTagString(String tag, ExifInterface exif){
+        //System.out.println(tag + " : " + exif.getAttribute(tag) + "\n");
+        return(tag + " : " + exif.getAttribute(tag) + "\n");
     }
 }

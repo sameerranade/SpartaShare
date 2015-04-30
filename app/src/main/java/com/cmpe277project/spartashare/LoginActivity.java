@@ -1,9 +1,12 @@
 package com.cmpe277project.spartashare;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -186,7 +189,7 @@ public class LoginActivity extends ActionBarActivity {
             }).executeAsync();
         } else if (state.isClosed()) {
             Log.i(TAG, "Logged out...");
-            otherView.setVisibility(View.GONE);
+            //otherView.setVisibility(View.GONE);
         }
     }
 

@@ -70,16 +70,6 @@ public class RegisterUserActivity extends ActionBarActivity {
                             System.out.println("List of Id :" +s);
                             System.out.println("List of Email :" +email);
                         }
-//                        List<BuiltObject> userList = queryResult.getResultObjects();
-
-
-                        /*for (BuiltObject user: userList){
-                            if (user.get("email").equals("samr3samr3@gmail.com")){
-                                Log.d("ResigsterUserActivity", "uid for sameer "+ user.getUid());
-                            }
-                        }*/
-                        //String temp = uemail.getUid();
-
                         Log.d("RegisterUserActivity","Email:"+email);
                         Log.d("RegisterUserActivity","Uid:"+uid);
                     }
@@ -87,7 +77,6 @@ public class RegisterUserActivity extends ActionBarActivity {
                     @Override
                     public void onError(BuiltError builtError) {
                         Log.d("Error in Query", builtError.getErrorMessage());
-                        //loginUser();
                     }
 
                     @Override
@@ -114,10 +103,6 @@ public class RegisterUserActivity extends ActionBarActivity {
                         // there was an error in creating the object
                         // builtErrorObject will contain more details
                         loginUser();
-                        //Toast.makeText(RegisterUserActivity.this, builtErrorObject.getErrorMessage(), Toast.LENGTH_LONG).show();
-                        //Intent intent = new Intent(RegisterUserActivity.this, HomeActivity.class);
-                        //intent.putExtras(bundle);
-                        //startActivity(intent);
                     }
 
                     @Override
