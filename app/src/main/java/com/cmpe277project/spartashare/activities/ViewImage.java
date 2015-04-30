@@ -28,14 +28,19 @@ public class ViewImage extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_image);
-        caption = (TextView) findViewById(R.id.tv_vi_caption);
-        tags = (TextView) findViewById(R.id.tv_vi_tags);
-        location = (TextView) findViewById(R.id.tv_vi_location);
-        albumName = (TextView) findViewById(R.id.tv_vi_directory);
-        displayImage = (ImageView) findViewById(R.id.iv_vi_image);
-        share = (Button) findViewById(R.id.btn_share);
+        setContentView(R.layout.activity_upload_image_with_info);
+        caption = (TextView) findViewById(R.id.et_caption);
+        caption.setEnabled(false);
+        tags = (TextView) findViewById(R.id.et_tags);
+        tags.setEnabled(false);
+        location = (TextView) findViewById(R.id.et_location);
+        location.setEnabled(false);
+        //albumName = (TextView) findViewById(R.id.tv_vi_directory);
+        displayImage = (ImageView) findViewById(R.id.iv_uploadImage);
+        share = (Button) findViewById(R.id.btn_upload);
+        share.setText("Save");
         fetchImageWithDetails();
+
     }
 
     private void fetchImageWithDetails() {
@@ -47,7 +52,7 @@ public class ViewImage extends ActionBarActivity {
         caption.setText(usersImage.getCaption());
         tags.setText(usersImage.getTags());
         location.setText(usersImage.getLocation());
-        albumName.setText(usersImage.getDirectoryNo());
+        //albumName.setText(usersImage.getDirectoryNo());
     }
 
 
