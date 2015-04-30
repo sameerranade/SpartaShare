@@ -5,8 +5,12 @@ import android.app.TabActivity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.internal.widget.AdapterViewCompat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TabHost;
 import android.widget.Toast;
@@ -16,6 +20,7 @@ import com.cmpe277project.spartashare.adapters.GalleryGridViewAdapter;
 import com.cmpe277project.spartashare.message.convertor.MessageConverter;
 import com.cmpe277project.spartashare.models.DirectoryInfo;
 import com.cmpe277project.spartashare.models.UsersImage;
+import com.google.gson.Gson;
 import com.raweng.built.Built;
 import com.raweng.built.BuiltError;
 import com.raweng.built.BuiltObject;
@@ -41,9 +46,26 @@ public class ViewGallery extends TabActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        getData();
-    }
+        gridView = (GridView) findViewById(R.id.gridView);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+               UsersImage item = (UsersImage) parent.getItemAtPosition(position);
+                Log.d("ViewGallery","Image URL "+item.getImageURL());
+                //Create intent
+                if(!item.isDir()) {
+                    Intent intent = new Intent(ViewGallery.this, ViewImage.class);
+                    intent.putExtras(MessageConverter.getInstance().putUsersImageInBundle(item));
+                    startActivity(intent);
+                }
+                else if(item.isDir()){
+                    getDictionaryData(item.getDirectoryNo());
+                }
 
+                //Toast.makeText(ViewGallery.this,"Clicked on Item " + position + "Item " + item.isDir(), Toast.LENGTH_SHORT ).show();
+            }
+        });
+        getDictionaryData("0");
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -67,16 +89,20 @@ public class ViewGallery extends TabActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void getData() {
+    private void getDictionaryData(final String directoryNo) {
         final ArrayList<UsersImage> imageItems = new ArrayList<UsersImage>();
         System.out.println("Inside get data");
         BuiltQuery query = new BuiltQuery("images");
+        query.where("directory",directoryNo);
         query.exec(new QueryResultsCallBack() {
             @Override
             public void onSuccess(QueryResult queryResult) {
                 //fetching Directories first
-                ArrayList<UsersImage> dirList = getDirList();
-                imageItems.addAll(dirList);
+
+                if (directoryNo.equals("0")) {
+                    ArrayList<UsersImage> dirList = getDirList();
+                    imageItems.addAll(dirList);
+                }
                 //fetching images from Server
                 List<BuiltObject> images = queryResult.getResultObjects();
                 for (BuiltObject i : images)
@@ -92,7 +118,7 @@ public class ViewGallery extends TabActivity {
 
             @Override
             public void onError(BuiltError builtError) {
-                Toast.makeText(ViewGallery.this,"No User Found",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewGallery.this, "No User Found", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -117,15 +143,27 @@ public class ViewGallery extends TabActivity {
     }
 
     private void populateGridView(ArrayList<UsersImage> ui) {
-        gridView = (GridView) findViewById(R.id.gridView);
+       // gridView = (GridView) findViewById(R.id.gridView);
         gridAdapter = new GalleryGridViewAdapter(ViewGallery.this, R.layout.gallary_grid_layout_item, ui);
         gridView.setAdapter(gridAdapter);
+       /* gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                UsersImage item = (UsersImage) parent.getItemAtPosition(position);
+                //Create intent
+                if(!item.isDir()) {
+                    Intent intent = new Intent(ViewGallery.this, ViewImage.class);
+                    intent.putExtra("usersImage", new Gson().toJson(item));
+                    //Start details activity
+                    startActivity(intent);
+                }
+            }
+        });*/
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        getData();
+        getDictionaryData("0");
 
     }
 }

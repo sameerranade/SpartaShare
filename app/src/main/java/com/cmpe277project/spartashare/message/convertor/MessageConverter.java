@@ -1,5 +1,7 @@
 package com.cmpe277project.spartashare.message.convertor;
 
+import android.os.Bundle;
+
 import com.cmpe277project.spartashare.models.DirectoryInfo;
 import com.cmpe277project.spartashare.models.UsersImage;
 import com.raweng.built.BuiltObject;
@@ -37,9 +39,31 @@ public class MessageConverter {
 
         usersImage.setCaption(dirInfo.getName());
         usersImage.setDir(true);
-        usersImage.setDirectoryNo(dirInfo.getName());
+        usersImage.setDirectoryNo(dirInfo.getDirNo());
         usersImage.setImageURL(dirInfo.getUrl());
 
+        return usersImage;
+    }
+
+    public Bundle putUsersImageInBundle(UsersImage usersImage){
+        Bundle bundle = new Bundle();
+        bundle.putString("caption", usersImage.getCaption());
+        bundle.putString("tags", usersImage.getTags());
+        bundle.putString("location", usersImage.getLocation());
+        bundle.putString("album", usersImage.getDirectoryNo());
+        bundle.putString("imageURL", usersImage.getImageURL());
+        bundle.putBoolean("isDir", usersImage.isDir());
+        return bundle;
+    }
+
+    public UsersImage getUsersImageFromBundle(Bundle bundle){
+        UsersImage usersImage = new UsersImage();
+        usersImage.setCaption(bundle.getString("caption"));
+        usersImage.setTags(bundle.getString("tags"));
+        usersImage.setLocation(bundle.getString("location"));
+        usersImage.setDirectoryNo(bundle.getString("album"));
+        usersImage.setImageURL(bundle.getString("imageURL"));
+        usersImage.setDir(bundle.getBoolean("isDir"));
         return usersImage;
     }
 }
