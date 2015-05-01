@@ -81,7 +81,7 @@ public class ViewGallery extends TabActivity {
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putString("albumName", directoryName);
-                Intent intent = new Intent(ViewGallery.this, ShareImage.class);
+                Intent intent = new Intent(ViewGallery.this, ContactListActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
