@@ -1,5 +1,6 @@
 package com.cmpe277project.spartashare.activities;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.media.ExifInterface;
@@ -40,7 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class UploadImageWithInfo extends ActionBarActivity {
+public class UploadImageWithInfo extends Activity {
     Uri imageUri;
     String imagePath;
     EditText caption;

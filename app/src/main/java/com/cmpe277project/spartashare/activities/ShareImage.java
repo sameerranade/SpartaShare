@@ -1,6 +1,6 @@
 package com.cmpe277project.spartashare.activities;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ShareImage extends ActionBarActivity {
+public class ShareImage extends Activity {
     private String albumName;
     EditText email;
     Button shareWithUser;
@@ -45,9 +45,7 @@ public class ShareImage extends ActionBarActivity {
         shareWithUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //getOtherUsersUID();
-                Intent intent = new Intent(ShareImage.this,ContactListActivity.class);
-                startActivity(intent);
+                getOtherUsersUID();
             }
         });
         /*BuiltUser user = new BuiltUser();
@@ -126,10 +124,11 @@ public class ShareImage extends ActionBarActivity {
 
         HashMap<String, Object> replaceCriteria = new HashMap<String, Object>();
         //replaceCriteria.put("caption", "trying to modify caption one");
-        // BuiltACL acl = new BuiltACL();
+       // BuiltACL acl = new BuiltACL();
         //acl.setPublicDeleteAccess(true);
 
         //replaceCriteria.put("acl",acl);
+
 
         builtObject.upsert(searchCriteria);
         //builtObject.set(replaceCriteria);
@@ -173,6 +172,8 @@ public class ShareImage extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
+
 }

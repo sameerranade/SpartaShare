@@ -1,5 +1,6 @@
 package com.cmpe277project.spartashare.activities;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +17,7 @@ import com.cmpe277project.spartashare.models.UsersImage;
 import com.google.gson.Gson;
 import com.raweng.built.androidquery.AQuery;
 
-public class ViewImage extends ActionBarActivity {
+public class ViewImage extends Activity {
     TextView caption;
     TextView tags;
     TextView location;
