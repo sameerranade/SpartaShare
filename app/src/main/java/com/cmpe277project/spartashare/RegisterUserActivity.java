@@ -1,5 +1,6 @@
 package com.cmpe277project.spartashare;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -25,13 +26,12 @@ import com.raweng.built.QueryResultsCallBack;
 import java.util.HashMap;
 import java.util.List;
 
-public class RegisterUserActivity extends ActionBarActivity {
+public class RegisterUserActivity extends Activity {
 
     public static String email;
     public static String uid;
     private EditText editText;
     Bundle bundle;
-
 
     private ProfilePictureView user_picture;
     @Override
@@ -155,13 +155,13 @@ public class RegisterUserActivity extends ActionBarActivity {
 
         bundle = getIntent().getExtras();
 
-        TextView usernameTextView = (TextView) findViewById(R.id.twitterusernametxtview);
+        TextView usernameTextView = (TextView) findViewById(R.id.textView);
         editText = (EditText) findViewById(R.id.emailedittxtview);
 
         if(bundle.getString("FacebookEmail") != null ) {
             email = bundle.getString("FacebookEmail");
             user_picture.setProfileId(bundle.getString("FacebookID"));
-            usernameTextView.setText("Welcome " + bundle.getString("FacebookEmail"));
+            usernameTextView.setText(bundle.getString("FacebookEmail"));
 
         }
         else
@@ -174,9 +174,7 @@ public class RegisterUserActivity extends ActionBarActivity {
                     editText.setCursorVisible(true);
                 }
             });
-            usernameTextView.setText("Welcome " + bundle.getString("TwitterUsername"));
+            usernameTextView.setText(bundle.getString("TwitterUsername"));
         }
-//      ImageView profilePictureImageView = (ImageView) findViewById(R.id.profilepictureimgview);
-//      aQuery.id(R.id.profilepictureimgview).image(bundle.getString("ProfileImageURL"));
     }
 }
