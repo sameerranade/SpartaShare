@@ -209,6 +209,7 @@ public class UploadImageWithInfo extends Activity {
             public void onSuccess() {
                 // object is created successfully
                 Toast.makeText(UploadImageWithInfo.this, "Object Sent to Server", Toast.LENGTH_SHORT).show();
+                finish();
                 //getObject();
             }
 

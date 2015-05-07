@@ -114,6 +114,7 @@ public class ViewGallery extends TabActivity {
         final ArrayList<UsersImage> imageItems = new ArrayList<UsersImage>();
         System.out.println("Inside get data");
         BuiltQuery query = new BuiltQuery("images");
+
         query.where("directory",directoryNo);
         query.exec(new QueryResultsCallBack() {
             @Override
@@ -189,5 +190,11 @@ public class ViewGallery extends TabActivity {
         super.onResume();
         getDictionaryData("Select Album");
 
+    }
+
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        getDictionaryData("Select Album");
     }
 }
