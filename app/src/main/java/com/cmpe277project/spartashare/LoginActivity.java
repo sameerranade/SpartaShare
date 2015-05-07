@@ -1,6 +1,7 @@
 package com.cmpe277project.spartashare;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -35,7 +36,7 @@ import java.security.NoSuchAlgorithmException;
 
 import io.fabric.sdk.android.Fabric;
 
-public class LoginActivity extends ActionBarActivity {
+public class LoginActivity extends Activity {
 
     //Twitter
     private TwitterLoginButton loginButton;

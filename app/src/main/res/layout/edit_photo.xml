@@ -15,7 +15,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp" >
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,40 +23,56 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#3b5998"
                 android:text="Original"
+                android:id="@+id/originalImage"
+                android:background="@drawable/shape"
                 android:textColor="#ffffff"
-                android:id="@+id/originalImage"/>
+                android:textStyle="bold"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sepia"
-                android:id="@+id/sepiaImage"/>
+                android:id="@+id/sepiaImage"
+                android:background="@drawable/shape"
+                android:textColor="#ffffff"
+                android:textStyle="bold"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Invert"
-                android:id="@+id/invertImage"/>
+                android:id="@+id/invertImage"
+                android:background="@drawable/shape"
+                android:textColor="#ffffff"
+                android:textStyle="bold"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Gray-Scale"
-                android:id="@+id/grayScaleImage"/>
+                android:id="@+id/grayScaleImage"
+                android:background="@drawable/shape"
+                android:textColor="#ffffff"
+                android:textStyle="bold"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Gamma Correction"
-                android:id="@+id/gammaCorrectionImage"/>
+                android:id="@+id/gammaCorrectionImage"
+                android:background="@drawable/shape"
+                android:textColor="#ffffff"
+                android:textStyle="bold"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Filter"
-                android:id="@+id/filterImage"/>
+                android:id="@+id/filterImage"
+                android:background="@drawable/shape"
+                android:textColor="#ffffff"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 
@@ -74,6 +89,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Save"
+            android:background="@drawable/shape"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
             android:id="@+id/saveImage"/>
 
         <Button
@@ -81,6 +99,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Share"
+            android:background="@drawable/shape"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
             android:id="@+id/shareImage"/>
 
     </LinearLayout>

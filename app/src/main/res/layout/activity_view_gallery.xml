@@ -48,6 +48,9 @@
                 android:text="Share"
                 android:id="@+id/btn_vg_share"
                 android:visibility="invisible"
+                android:background="@drawable/shape"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
                 android:layout_alignParentBottom="true"
                 android:layout_alignStart="@+id/gridView"
                 android:layout_alignEnd="@+id/gridView" />

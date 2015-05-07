@@ -9,8 +9,6 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical">
-        <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
         <ImageView
             android:id="@+id/iv_vi_image"
             android:layout_width="fill_parent"
@@ -33,28 +31,40 @@
                     android:layout_weight="1"
                     android:tag="LableForCaption"
                     android:text="Caption"
-                    android:enabled="false"/>
+                    android:enabled="false"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:textSize="15sp"/>
                 <TextView
+                    android:textSize="15sp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:tag="LableForLocation"
                     android:text="Location"
-                    android:enabled="false"/>
+                    android:enabled="false"
+                    android:textColor="#000000"
+                    android:textStyle="bold"/>
                 <TextView
+                    android:textSize="15sp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:tag="LableForTags"
                     android:text="Tags"
-                    android:enabled="false"/>
+                    android:enabled="false"
+                    android:textColor="#000000"
+                    android:textStyle="bold"/>
                 <TextView
+                    android:textSize="15sp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:tag="LableForDirectory"
                     android:text="Album"
-                    android:enabled="false"/>
+                    android:enabled="false"
+                    android:textColor="#000000"
+                    android:textStyle="bold"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,28 +77,39 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
                     android:cursorVisible="true"/>
                 <TextView
                     android:id="@+id/tv_vi_location"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textColor="#000000"
+                    android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/tv_vi_tags"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textColor="#000000"
+                    android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/tv_vi_directory"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textColor="#000000"
+                    android:textStyle="bold"/>
             </LinearLayout>
         </LinearLayout>
         <Button
             android:id="@+id/btn_share"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Share" />
+            android:text="Share"
+            android:background="@drawable/shape"
+            android:textColor="#ffffff"
+            android:textStyle="bold"/>
     </LinearLayout>
 </ScrollView>
