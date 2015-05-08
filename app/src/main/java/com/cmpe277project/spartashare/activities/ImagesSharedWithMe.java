@@ -2,7 +2,6 @@ package com.cmpe277project.spartashare.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -10,8 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
-
 import com.cmpe277project.spartashare.R;
 import com.cmpe277project.spartashare.RegisterUserActivity;
 import com.cmpe277project.spartashare.adapters.GalleryGridViewAdapter;
@@ -46,7 +43,7 @@ public class ImagesSharedWithMe extends Activity {
                     intent.putExtras(MessageConverter.getInstance().putUsersImageInBundle(item));
                     startActivity(intent);
                 }
-                //Toast.makeText(ViewGallery.this,"Clicked on Item " + position + "Item " + item.isDir(), Toast.LENGTH_SHORT ).show();
+
             }
         });
         fetchImagesSharedWithMe();
@@ -79,7 +76,7 @@ public class ImagesSharedWithMe extends Activity {
 
             @Override
             public void onError(BuiltError builtError) {
-                Toast.makeText(ImagesSharedWithMe.this, "No User Found", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override

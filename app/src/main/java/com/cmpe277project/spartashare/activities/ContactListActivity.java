@@ -16,8 +16,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.cmpe277project.spartashare.R;
 import com.cmpe277project.spartashare.models.UsersImage;
 import com.raweng.built.BuiltACL;
@@ -50,7 +48,7 @@ public class ContactListActivity extends Activity{
             setContentView(R.layout.activity_contact_list);
             Bundle bundle = getIntent().getExtras();
             albumName = bundle.getString("albumName");
-            Toast.makeText(ContactListActivity.this,"AlbumName " + bundle.getString("albumName"), Toast.LENGTH_SHORT).show();
+
             fetchContacts();
             ListView lv = (ListView) findViewById(R.id.listView);
 
@@ -67,7 +65,7 @@ public class ContactListActivity extends Activity{
                     final TextView clickedView = (TextView) view.findViewById(R.id.nameColumn);
                     final TextView clickedEmail = (TextView) view.findViewById(R.id.emailColumn);
 
-                    //Toast.makeText(ContactListActivity.this, "Item with id [" + id + "] - Position [" + position + "] - Contact [" + clickedView.getText() + "]", Toast.LENGTH_SHORT).show();
+
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ContactListActivity.this);
 
                     // set title
@@ -160,7 +158,7 @@ public class ContactListActivity extends Activity{
             try {
                 startActivity(Intent.createChooser(i, "Send mail..."));
             } catch (android.content.ActivityNotFoundException ex) {
-                Toast.makeText(ContactListActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+
             }
         }
     private void getOtherUsersUID(String email){
@@ -201,7 +199,7 @@ public class ContactListActivity extends Activity{
 
             @Override
             public void onError(BuiltError builtError) {
-                Toast.makeText(ContactListActivity.this, "No User Found", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
@@ -233,12 +231,10 @@ public class ContactListActivity extends Activity{
         builtObject.save(new BuiltResultCallBack() {
             @Override
             public void onSuccess() {
-                Toast.makeText(ContactListActivity.this, "Image Shared Successful", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onError(BuiltError builtError) {
-                Toast.makeText(ContactListActivity.this, "Upsert Failed \n" + builtError.toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override

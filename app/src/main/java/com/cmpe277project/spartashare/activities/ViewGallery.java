@@ -17,9 +17,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ListView;
-import android.widget.TabHost;
-import android.widget.Toast;
 
 import com.cmpe277project.spartashare.DAO.DatabaseHandler;
 import com.cmpe277project.spartashare.R;
@@ -75,8 +72,6 @@ public class ViewGallery extends TabActivity {
                     directoryName = item.getCaption();
                     getDictionaryData(item.getCaption());
                 }
-
-                //Toast.makeText(ViewGallery.this,"Clicked on Item " + position + "Item " + item.isDir(), Toast.LENGTH_SHORT ).show();
             }
         });
         getDictionaryData("Select Album");
@@ -206,7 +201,7 @@ public class ViewGallery extends TabActivity {
 
             @Override
             public void onError(BuiltError builtError) {
-                Toast.makeText(ViewGallery.this, "No User Found", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override

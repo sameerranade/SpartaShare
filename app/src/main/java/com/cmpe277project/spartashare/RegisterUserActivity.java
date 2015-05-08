@@ -65,7 +65,7 @@ public class RegisterUserActivity extends Activity {
                     @Override
                     public void onSuccess() {
                         // object is created successfully
-                        Toast.makeText(RegisterUserActivity.this, "Registered successfully", Toast.LENGTH_LONG).show();
+
                         loginUser();
                         Intent intent = new Intent(RegisterUserActivity.this, HomeActivity.class);
                         //intent.putExtras(bundle);
@@ -83,7 +83,7 @@ public class RegisterUserActivity extends Activity {
                     public void onAlways() {
                         // write code here that you want to execute
                         // regardless of success or failure of the operation
-                        Toast.makeText(RegisterUserActivity.this, "What happened here", Toast.LENGTH_LONG).show();
+
                     }
                 });
             }
@@ -99,11 +99,11 @@ public class RegisterUserActivity extends Activity {
             public void onSuccess() {
                 // user has logged in successfully
                 // builtUserObject.authtoken contains the session authtoken
-                Toast.makeText(RegisterUserActivity.this,"Login Successful", Toast.LENGTH_SHORT).show();
+
                 uid = builtUserObject.getUserUid();
                 email = builtUserObject.getEmailId();
                 Log.d("RegisterUserActivity", "UserID:" + builtUserObject.getUserUid() + " Email" + builtUserObject.getEmailId());
-                Toast.makeText(RegisterUserActivity.this,"Login Successful", Toast.LENGTH_LONG).show();
+
                 Intent intent = new Intent(RegisterUserActivity.this, HomeActivity.class);
                 //intent.putExtras(bundle);
                 startActivity(intent);

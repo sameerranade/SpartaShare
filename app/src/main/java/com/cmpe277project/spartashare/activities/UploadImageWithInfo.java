@@ -90,7 +90,7 @@ public class UploadImageWithInfo extends Activity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position > 1) {
                     albumName = parent.getItemAtPosition(position).toString();
-                    Toast.makeText(parent.getContext(), "Selected Directory : " + parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+
                 } else {
                     if (position == 1) {
                         LayoutInflater li = LayoutInflater.from(UploadImageWithInfo.this);
@@ -208,7 +208,7 @@ public class UploadImageWithInfo extends Activity {
             @Override
             public void onSuccess() {
                 // object is created successfully
-                Toast.makeText(UploadImageWithInfo.this, "Object Sent to Server", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UploadImageWithInfo.this, "Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
                 finish();
                 //getObject();
             }

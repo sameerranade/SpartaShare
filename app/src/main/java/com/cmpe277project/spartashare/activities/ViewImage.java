@@ -47,7 +47,6 @@ public class ViewImage extends Activity {
     private void fetchImageWithDetails() {
         usersImage = MessageConverter.getInstance().getUsersImageFromBundle(getIntent().getExtras());
         Log.d("ViewImage", "Image URL: " + usersImage.getImageURL());
-        Toast.makeText(ViewImage.this,"View Image URL " + usersImage.getImageURL(),Toast.LENGTH_SHORT).show();
         AQuery androidQuery = new AQuery(displayImage);
         androidQuery.id(displayImage).image(usersImage.getImageURL());
         caption.setText(usersImage.getCaption());

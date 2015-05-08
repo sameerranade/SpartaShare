@@ -354,40 +354,12 @@ public class EditPhotoActivity extends Activity {
             e.printStackTrace();
         }
         if (success) {
-            Toast.makeText(getApplicationContext(), "Image saved with success",
-                    Toast.LENGTH_LONG).show();
+
             Bundle bundle = new Bundle();
             Intent intent = new Intent(EditPhotoActivity.this, HomeActivity.class);
             bundle.putString("TabNo","1");
             intent.putExtras(bundle);
             startActivity(intent);
-        } else {
-            Toast.makeText(getApplicationContext(),
-                    "Error during image saving", Toast.LENGTH_LONG).show();
         }
-        /*String root = Environment.getExternalStorageDirectory()
-                .toString() + "/DCIM/TEST/";
-        File myDir = new File(root);
-        System.out.println(editedBitmap);
-        myDir.mkdirs();
-        String fname = "image" + new Date().getTime();
-        File file = new File(myDir, fname);
-        if (file.exists())
-            System.out.println("If");
-            file.delete();
-        try {
-            System.out.println("Hello1");
-            FileOutputStream out = new FileOutputStream(file);
-            System.out.println("Hello2");
-            editedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-            System.out.println("Hello3");
-            System.out.println(file.getAbsolutePath());
-            out.flush();
-            out.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("error" + e);
-
-        }*/
     }
 }

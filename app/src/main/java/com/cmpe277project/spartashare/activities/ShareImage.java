@@ -40,7 +40,6 @@ public class ShareImage extends Activity {
         email = (EditText) findViewById(R.id.et_si_email);
         Bundle bundle = getIntent().getExtras();
         albumName = bundle.getString("albumName");
-        Toast.makeText(ShareImage.this,"AlbumName " + bundle.getString("albumName"), Toast.LENGTH_SHORT).show();
         shareWithUser = (Button) findViewById(R.id.btn_si_share);
         shareWithUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,7 +104,7 @@ public class ShareImage extends Activity {
 
             @Override
             public void onError(BuiltError builtError) {
-                Toast.makeText(ShareImage.this, "No User Found", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
@@ -138,12 +137,12 @@ public class ShareImage extends Activity {
         builtObject.save(new BuiltResultCallBack() {
             @Override
             public void onSuccess() {
-                Toast.makeText(ShareImage.this, "Image Shared Successful", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
             public void onError(BuiltError builtError) {
-                Toast.makeText(ShareImage.this, "Upsert Failed \n" + builtError.toString(), Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
