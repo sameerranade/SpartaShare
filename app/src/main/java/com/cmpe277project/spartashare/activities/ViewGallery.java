@@ -1,18 +1,23 @@
 package com.cmpe277project.spartashare.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.TabActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.internal.widget.AdapterViewCompat;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.Toast;
 
@@ -41,6 +46,7 @@ public class ViewGallery extends TabActivity {
     private DatabaseHandler db = new DatabaseHandler(ViewGallery.this);
     private Button share;
     private String directoryName;
+    private Button search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +92,66 @@ public class ViewGallery extends TabActivity {
                 startActivity(intent);
             }
         });
+
+        search = (Button) findViewById(R.id.btn_vg_search);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LayoutInflater li = LayoutInflater.from(ViewGallery.this);
+                View promptsView = li.inflate(R.layout.searchdialogbox, null);
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ViewGallery.this);
+                alertDialogBuilder.setView(promptsView);
+                final EditText userInput = (EditText) promptsView
+                        .findViewById(R.id.sd_editTextDialogUserInput);
+                // set title
+                alertDialogBuilder.setTitle("Enter Caption for Search");
+
+                // set dialog message
+                alertDialogBuilder
+                        .setCancelable(false)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // if this button is clicked, close
+                                // current activity
+                                searchImage(userInput.getText().toString());
+                            }
+                        });
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
+            }
+        });
+    }
+
+    public void searchImage(String captionToSearch){
+        Log.d("View Gallery", "Inside Search Image");
+        BuiltQuery query = new BuiltQuery("images");
+        query.matches("caption",".*"+captionToSearch+".*","i");
+        query.exec(new QueryResultsCallBack() {
+            @Override
+            public void onSuccess(QueryResult queryResult) {
+                Log.d("View Gallery", "Inside Search Image onSuccess");
+                List<BuiltObject> result = queryResult.getResultObjects();
+                Log.d("View Gallery", "Size of searched result " + result.size());
+                UsersImage searchedImage = MessageConverter.getInstance().convertToImages(result.get(0));
+                Intent intent = new Intent(ViewGallery.this, ViewImage.class);
+                intent.putExtras(MessageConverter.getInstance().putUsersImageInBundle(searchedImage));
+                startActivity(intent);
+            }
+
+            @Override
+            public void onError(BuiltError builtError) {
+
+            }
+
+            @Override
+            public void onAlways() {
+
+            }
+        });
     }
 
     @Override
@@ -115,7 +181,7 @@ public class ViewGallery extends TabActivity {
         System.out.println("Inside get data");
         BuiltQuery query = new BuiltQuery("images");
 
-        query.where("directory",directoryNo);
+        query.where("directory", directoryNo);
         query.exec(new QueryResultsCallBack() {
             @Override
             public void onSuccess(QueryResult queryResult) {

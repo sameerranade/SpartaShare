@@ -41,6 +41,18 @@
                 android:focusable="true"
                 android:clickable="true"
                 />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Search"
+                android:id="@+id/btn_vg_search"
+                android:visibility="visible"
+                android:background="@drawable/shape"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/btn_vg_share"
+                android:layout_alignEnd="@+id/btn_vg_share" />
 
             <Button
                 android:layout_width="match_parent"
@@ -51,9 +63,10 @@
                 android:background="@drawable/shape"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
-                android:layout_alignParentBottom="true"
+                android:layout_above="@id/btn_vg_search"
                 android:layout_alignStart="@+id/gridView"
-                android:layout_alignEnd="@+id/gridView" />
+                android:layout_alignEnd="@+id/gridView"
+                android:layout_marginBottom="10sp" />
         </RelativeLayout>
     </LinearLayout>
 </TabHost>

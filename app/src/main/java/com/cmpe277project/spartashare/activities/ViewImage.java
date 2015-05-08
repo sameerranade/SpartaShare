@@ -36,7 +36,7 @@ public class ViewImage extends Activity {
         tags.setEnabled(false);
         location = (TextView) findViewById(R.id.et_location);
         location.setEnabled(false);
-        //albumName = (TextView) findViewById(R.id.tv_vi_directory);
+        albumName = (TextView) findViewById(R.id.tv_vi_directory);
         displayImage = (ImageView) findViewById(R.id.iv_uploadImage);
         share = (Button) findViewById(R.id.btn_upload);
         share.setText("Save");
