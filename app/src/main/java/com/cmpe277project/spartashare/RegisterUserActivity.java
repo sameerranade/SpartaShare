@@ -2,7 +2,6 @@ package com.cmpe277project.spartashare;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -11,20 +10,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.cmpe277project.spartashare.activities.HomeActivity;
 import com.facebook.widget.ProfilePictureView;
-import com.raweng.built.Built;
-import com.raweng.built.BuiltApplication;
 import com.raweng.built.BuiltError;
-import com.raweng.built.BuiltObject;
-import com.raweng.built.BuiltQuery;
 import com.raweng.built.BuiltResultCallBack;
 import com.raweng.built.BuiltUser;
-import com.raweng.built.QueryResult;
-import com.raweng.built.QueryResultsCallBack;
+
 import java.util.HashMap;
-import java.util.List;
 
 public class RegisterUserActivity extends Activity {
 

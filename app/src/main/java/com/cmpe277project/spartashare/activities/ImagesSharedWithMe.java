@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+
 import com.cmpe277project.spartashare.R;
 import com.cmpe277project.spartashare.RegisterUserActivity;
 import com.cmpe277project.spartashare.adapters.GalleryGridViewAdapter;

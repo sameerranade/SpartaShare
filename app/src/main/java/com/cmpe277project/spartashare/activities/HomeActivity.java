@@ -2,7 +2,6 @@ package com.cmpe277project.spartashare.activities;
 
 import android.app.TabActivity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;

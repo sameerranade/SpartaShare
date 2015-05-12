@@ -10,9 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cmpe277project.spartashare.R;
-import com.cmpe277project.spartashare.activities.ViewGallery;
 import com.cmpe277project.spartashare.models.UsersImage;
-import com.cmpe277project.spartashare.util.LoadImage;
 import com.raweng.built.androidquery.AQuery;
 
 import java.util.ArrayList;

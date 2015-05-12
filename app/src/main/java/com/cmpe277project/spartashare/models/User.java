@@ -1,7 +1,5 @@
 package com.cmpe277project.spartashare.models;
 
-import android.text.LoginFilter;
-
 /**
  * Created by Varun on 4/28/2015.
  */

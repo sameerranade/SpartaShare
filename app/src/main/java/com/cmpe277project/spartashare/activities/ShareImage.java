@@ -1,7 +1,6 @@
 package com.cmpe277project.spartashare.activities;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -9,11 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.cmpe277project.spartashare.R;
-import com.cmpe277project.spartashare.RegisterUserActivity;
-import com.cmpe277project.spartashare.message.convertor.MessageConverter;
 import com.cmpe277project.spartashare.models.UsersImage;
 import com.raweng.built.BuiltACL;
 import com.raweng.built.BuiltError;

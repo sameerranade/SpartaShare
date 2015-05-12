@@ -3,7 +3,6 @@ package com.cmpe277project.spartashare.message.convertor;
 import android.os.Bundle;
 
 import com.cmpe277project.spartashare.models.Directory;
-import com.cmpe277project.spartashare.models.DirectoryInfo;
 import com.cmpe277project.spartashare.models.UsersImage;
 import com.raweng.built.BuiltObject;
 

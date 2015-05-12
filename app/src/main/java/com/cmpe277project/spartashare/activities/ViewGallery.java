@@ -1,13 +1,10 @@
 package com.cmpe277project.spartashare.activities;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.TabActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.internal.widget.AdapterViewCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,9 +21,7 @@ import com.cmpe277project.spartashare.RegisterUserActivity;
 import com.cmpe277project.spartashare.adapters.GalleryGridViewAdapter;
 import com.cmpe277project.spartashare.message.convertor.MessageConverter;
 import com.cmpe277project.spartashare.models.Directory;
-import com.cmpe277project.spartashare.models.DirectoryInfo;
 import com.cmpe277project.spartashare.models.UsersImage;
-import com.google.gson.Gson;
 import com.raweng.built.Built;
 import com.raweng.built.BuiltError;
 import com.raweng.built.BuiltObject;

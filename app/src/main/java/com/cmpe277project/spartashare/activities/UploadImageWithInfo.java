@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.media.ExifInterface;
-import android.support.v7.app.ActionBarActivity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,23 +18,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cmpe277project.spartashare.DAO.DatabaseHandler;
 import com.cmpe277project.spartashare.R;
 import com.cmpe277project.spartashare.RegisterUserActivity;
 import com.cmpe277project.spartashare.models.Directory;
-import com.cmpe277project.spartashare.models.DirectoryInfo;
 import com.cmpe277project.spartashare.util.GetAbsoluteImagePath;
-import com.facebook.TestSession;
-import com.raweng.built.BuiltACL;
 import com.raweng.built.BuiltError;
 import com.raweng.built.BuiltFile;
 import com.raweng.built.BuiltFileUploadCallback;
 import com.raweng.built.BuiltObject;
 import com.raweng.built.BuiltResultCallBack;
-
-import android.net.Uri;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
